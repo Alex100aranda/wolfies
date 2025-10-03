@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wolfies Femenil — Equipo</title>
+
+<style>
+/* =========================
+   WOLFIES — Equipo (one-file)
+   ========================= */
+:root{
+  --bg:#0b0c10;
+  --panel:#14121b;
+  --text:#f7f7f7;
+  --muted:#c8c5d4;
+  --violet-700:#6d28d9;
+  --violet-600:#7c3aed;
+  --violet-500:#8b5cf6;
+  --violet-300:#c4b5fd;
+  --radius:16px;
+  --radius-lg:22px;
+  --shadow:0 10px 30px rgba(0,0,0,.22);
+  --shadow-lg:0 18px 40px rgba(0,0,0,.32);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(124,58,237,.12) 0%, rgba(124,58,237,0) 60%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+.container{max-width:1200px;margin:0 auto;padding:24px 20px}
+
+/* Header simple */
+.header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 20px;margin:8px auto 0;max-width:1200px
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:800}
+.brand__logo{width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;
+  background: radial-gradient(100% 100% at 30% 20%, var(--violet-500) 0%, var(--violet-600) 60%, #1b0b33 100%);
+  box-shadow: var(--shadow);font-weight:900}
+.header a{color:#fff;text-decoration:none;opacity:.9}
+.header a:hover{opacity:1}
+
+/* Título */
+h1{
+  font-size: clamp(28px, 4.8vw, 46px);
+  margin: 6px 0 4px;
+  letter-spacing:.3px
+}
+.subtitle{
+  color:var(--muted);
+  margin:0 0 28px
+}
+
+/* Grid de cards */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:18px
+}
+
+/* Card */
+.card{
+  position:relative;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(196,181,253,.22);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, translate .18s ease;
+  cursor:pointer;
+}
+.card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(196,181,253,.38); }
+.card__media{
+  aspect-ratio: 1/1;
+  background:#120e19;
+  position:relative;
+  overflow:hidden;
+}
+.card__media img{ width:100%; height:100%; object-fit: cover; display:block; }
+.card__fallback{
+  position:absolute; inset:0; display:grid; place-items:center;
+  background: radial-gradient(70% 70% at 50% 40%, rgba(139,92,246,.25), rgba(19,15,26,.9));
+  font-weight:900; font-size:48px; color:#fff; letter-spacing:.5px;
+}
+
+.badge{
+  position:absolute; top:10px; left:10px;
+  background: rgba(17,12,28,.6);
+  border:1px solid rgba(196,181,253,.28);
+  color:#fff; font-weight:800;
+  padding:6px 10px; border-radius:999px; display:flex; align-items:center; gap:8px;
+}
+
+.card__body{ padding:14px 14px 16px; display:grid; gap:4px }
+.card__name{ font-size:1.05rem; font-weight:900; letter-spacing:.2px }
+.card__role{ color:var(--violet-300); font-weight:700; font-size:.92rem }
+.card__excerpt{ color:var(--muted); font-size:.95rem }
+
+/* Tooltip (modal flotante desktop) */
+.tooltip{
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  transform: translate(-50%, -110%);
+  min-width: 260px;
+  max-width: 320px;
+  background: #151225;
+  color:#fff;
+  border:1px solid rgba(196,181,253,.32);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  padding:12px 14px;
+  display:none;
+}
+.tooltip__title{font-weight:900;margin:0 0 4px;}
+.tooltip__meta{color:#e8e6ff;font-weight:700;margin:0 0 8px;font-size:.95rem}
+.tooltip__bio{color:#cfcaf7;font-size:.95rem;margin:0}
+
+/* Modal centrado (para móvil o click) */
+.modal-backdrop{
+  position: fixed; inset:0; background: rgba(6, 4, 12, .55);
+  backdrop-filter: blur(2px);
+  display:none; z-index: 60;
+}
+.modal{
+  position: fixed; inset:auto 0 0 0; margin:auto;
+  width:min(560px, 92vw);
+  background:#151225; color:#fff; border-radius:20px; border:1px solid rgba(196,181,253,.28);
+  box-shadow: var(--shadow-lg); z-index: 70;
+  padding:16px 16px 18px; display:none;
+}
+.modal__header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.modal__title{font-weight:900;margin:0}
+.modal__close{
+  appearance:none;border:0;background:transparent;color:#fff;cursor:pointer;
+  font-size:22px;line-height:1;border-radius:10px;padding:6px
+}
+.modal__content{display:grid;grid-template-columns:100px 1fr;gap:14px;align-items:center}
+@media (max-width:640px){
+  .modal__content{grid-template-columns:1fr}
+}
+.modal__photo{
+  width:100px;height:100px;border-radius:14px;overflow:hidden;background:#120e19;border:1px solid rgba(196,181,253,.22)
+}
+.modal__photo img{width:100%;height:100%;object-fit:cover;display:block}
+.modal__meta{color:#e8e6ff;font-weight:700;margin:.5rem 0 .25rem}
+.modal__bio{color:#cfcaf7;margin:0}
+
+/* Botón back a home (opcional) */
+.nav-back{color:#c4b5fd;font-weight:800}
+.nav-back:hover{text-decoration:underline}
+
+/* Accesibilidad focus */
+:focus-visible{outline:2px solid var(--violet-500); outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="brand" href="index.html">
+    <div class="brand__logo">W</div>
+    <div class="brand__text">Wolfies <span>Femenil</span></div>
+  </a>
+  <a class="nav-back" href="index.html">← Volver al inicio</a>
+</header>
+
+<div class="container">
+  <h1>Nuestro equipo</h1>
+  <p class="subtitle">Plantel actual: cuerpo técnico y jugadoras convocadas.</p>
+
+  <!-- Grid -->
+  <section class="grid" id="cards">
+    <!-- Las cards se generan con JS desde el arreglo "ROSTER" -->
+  </section>
+</div>
+
+<!-- Tooltip flotante (desktop/hover) -->
+<div class="tooltip" id="tooltip" role="dialog" aria-hidden="true">
+  <div class="tooltip__title" id="tt-name"></div>
+  <div class="tooltip__meta" id="tt-meta"></div>
+  <p class="tooltip__bio" id="tt-bio"></p>
+</div>
+
+<!-- Modal para móvil / click -->
+<div class="modal-backdrop" id="backdrop" aria-hidden="true"></div>
+<dialog class="modal" id="modal">
+  <div class="modal__header">
+    <h3 class="modal__title" id="m-name">Jugador/a</h3>
+    <button class="modal__close" id="m-close" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="modal__content">
+    <div class="modal__photo"><img id="m-photo" alt="" /></div>
+    <div>
+      <div class="modal__meta" id="m-meta"></div>
+      <p class="modal__bio" id="m-bio"></p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* =========================================
+   DATA: ajusta fotos, dorsales, posiciones y bios
+   Nombres: solo de pila (sin apellidos).
+   Si no hay foto, se genera avatar con iniciales.
+========================================= */
+const ROSTER = [
+  // DT
+  {
+    role: "DT",
+    number: null,
+    name: "David",
+    photo: "img/dt.jpg",
+    bio: "Director Técnico con enfoque en disciplina táctica y crecimiento integral del grupo.",
+  },
+  // Jugadoras (usa tus fotos reales o deja el fallback)
+  { number: 14, name: "Ximena",  photo: "img/jugadora.webp",  bio: "Extremo veloz, rompe líneas y presiona alto." },
+  { number: 9,  name: "Abril",   photo: "img/jugadora.webp",    bio: "Medio creativo: visión, pase y golpeo de media distancia." },
+  { number: 97, name: "Lea",     photo: "img/jugadora.webp",     bio: "Defensa con gran lectura y anticipo." },
+  { number: 7,  name: "Fernanda",photo: "img/jugadora.webp", bio: "Carrilera incansable; ida y vuelta con criterio." },
+  { number: 13, name: "Regina",  photo: "img/jugadora.webp",  bio: "Pivot con potencia y juego aéreo." },
+  { number: 28, name: "Sofía",   photo: "img/jugadora.webp",   bio: "Delantera con olfato y definición en el área." },
+  { number: 19, name: "Camila",  photo: "img/jugadora.webp",  bio: "Interior dinámica; conduce y asiste." },
+  { number: 5,  name: "Karla",   photo: "img/jugadora.webp",    bio: "Extremo invertida; uno vs uno y buen centro." },
+  { number: 12, name: "Noemí",   photo: "img/jugadora.webp",   bio: "Guardameta segura, reflejos y liderazgo atrás." },
+  { number: 11, name: "Fernanda R.", photo: "img/jugadora.webp", bio: "Medio defensiva: equilibrio y recuperación." },
+  { number: 6,  name: "Lucía",   photo: "img/jugadora.webp",    bio: "Lateral técnica, salida limpia desde el fondo." },
+  { number: 21, name: "Hanna",   photo: "img/jugadora.webp",   bio: "Volante ofensiva, cambio de ritmo y disparo." },
+];
+
+/* =========================================
+   RENDER
+========================================= */
+const $grid = document.getElementById('cards');
+
+function initialsFromName(name){
+  const parts = name.trim().split(/\s+/);
+  const first = (parts[0]||'')[0] || '';
+  const second = (parts[1]||'')[0] || '';
+  return (first + second).toUpperCase() || 'W';
+}
+
+function createCard(p){
+  const article = document.createElement('article');
+  article.className = 'card';
+  article.dataset.name = p.name;
+  article.dataset.role = p.role || 'Jugadora';
+  article.dataset.number = p.number ?? '';
+  article.dataset.bio = p.bio || '';
+
+  const media = document.createElement('div');
+  media.className = 'card__media';
+
+  const img = document.createElement('img');
+  img.alt = p.role === 'DT' ? `DT ${p.name}` : `Foto de ${p.name}`;
+  img.src = p.photo || '';
+  img.addEventListener('error', () => {
+    img.style.display = 'none';
+    const fb = document.createElement('div');
+    fb.className = 'card__fallback';
+    fb.textContent = initialsFromName(p.name);
+    media.appendChild(fb);
+  });
+
+  // badge (DT o dorsal)
+  const badge = document.createElement('div');
+  badge.className = 'badge';
+  badge.innerHTML = p.role === 'DT'
+    ? `<i class="fa-solid fa-user-tie"></i> DT`
+    : `<i class="fa-solid fa-shirt"></i> ${p.number ?? ''}`;
+
+  media.append(img, badge);
+
+  const body = document.createElement('div');
+  body.className = 'card__body';
+  const name = document.createElement('div');
+  name.className = 'card__name';
+  name.textContent = p.name;
+  const role = document.createElement('div');
+  role.className = 'card__role';
+  role.textContent = p.role || 'Jugadora';
+  const excerpt = document.createElement('div');
+  excerpt.className = 'card__excerpt';
+  excerpt.textContent = p.bio;
+
+  body.append(name, role, excerpt);
+  article.append(media, body);
+  return article;
+}
+
+ROSTER.forEach(p => $grid.appendChild(createCard(p)));
+
+/* =========================================
+   TOOLTIP (desktop hover) + MODAL (click/móvil)
+========================================= */
+const $tooltip = document.getElementById('tooltip');
+const $ttName = document.getElementById('tt-name');
+const $ttMeta = document.getElementById('tt-meta');
+const $ttBio  = document.getElementById('tt-bio');
+
+const $modal = document.getElementById('modal');
+const $backdrop = document.getElementById('backdrop');
+const $mName = document.getElementById('m-name');
+const $mMeta = document.getElementById('m-meta');
+const $mBio  = document.getElementById('m-bio');
+const $mPhoto = document.getElementById('m-photo');
+const $mClose = document.getElementById('m-close');
+
+const isTouch = matchMedia('(hover: none), (pointer: coarse)').matches;
+
+function showTooltip(card, x, y){
+  const n = card.dataset.name;
+  const r = card.dataset.role;
+  const d = card.dataset.number;
+  const b = card.dataset.bio;
+  $ttName.textContent = n;
+  $ttMeta.textContent = r === 'DT' ? 'Dirección Técnica' : `#${d} · ${r}`;
+  $ttBio.textContent = b;
+  $tooltip.style.display = 'block';
+  // posición con límites
+  const pad = 14;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  let tx = x, ty = y - 20;
+  tx = Math.max(pad, Math.min(vw - pad, tx));
+  ty = Math.max(pad + 10, Math.min(vh - pad, ty));
+  $tooltip.style.left = tx + 'px';
+  $tooltip.style.top  = ty + 'px';
+}
+function hideTooltip(){ $tooltip.style.display = 'none'; }
+
+function openModal(card){
+  const n = card.dataset.name;
+  const r = card.dataset.role;
+  const d = card.dataset.number;
+  const b = card.dataset.bio;
+  const img = card.querySelector('.card__media img');
+
+  $mName.textContent = n;
+  $mMeta.textContent = r === 'DT' ? 'Dirección Técnica' : `#${d} · ${r}`;
+  $mBio.textContent = b;
+  if (img && img.src){
+    $mPhoto.src = img.src; $mPhoto.alt = n;
+  } else {
+    $mPhoto.removeAttribute('src');
+    $mPhoto.alt = n;
+  }
+
+  $backdrop.style.display = 'block';
+  $modal.style.display = 'block';
+  if (!$modal.open) $modal.showModal?.();
+}
+function closeModal(){
+  $modal.close?.();
+  $modal.style.display = 'none';
+  $backdrop.style.display = 'none';
+}
+
+/* Eventos por tarjeta */
+document.getElementById('cards').addEventListener('mousemove', (e) => {
+  if (isTouch) return; // en móviles usamos modal
+  const card = e.target.closest('.card');
+  if (!card) { hideTooltip(); return; }
+  showTooltip(card, e.clientX, e.clientY);
+});
+document.getElementById('cards').addEventListener('mouseleave', () => {
+  if (isTouch) return;
+  hideTooltip();
+});
+document.getElementById('cards').addEventListener('click', (e) => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  openModal(card);
+});
+
+$mClose.addEventListener('click', closeModal);
+$backdrop.addEventListener('click', closeModal);
+window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+/* Font Awesome (iconos para badge) – CDN ligero */
+(function fa(){
+  const l=document.createElement('link');
+  l.rel='stylesheet';
+  l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css';
+  l.crossOrigin='anonymous'; l.referrerPolicy='no-referrer';
+  document.head.appendChild(l);
+})();
+</script>
+</body>
+</html>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wolfies Femenil</title>
+  <meta name="description" content="Wolfies Femenil: formación deportiva, trabajo en equipo y pasión por el fútbol. Únete al club y vive cada partido con garra." />
 
   <!-- AOS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -32,65 +33,166 @@
         <ul class="nav__list">
           <li><a class="nav__link" href="#hero"><i class="fa-solid fa-house"></i> Inicio</a></li>
           <li><a class="nav__link" href="#about"><i class="fa-solid fa-paw"></i> Wolfies</a></li>
-          <li><a class="nav__link" href="#teams"><i class="fa-solid fa-people-group"></i> Equipos</a></li>
+          <li><a class="nav__link" href="#team"><i class="fa-solid fa-people-group"></i> Equipo</a></li>
           <li><a class="nav__link" href="#contact"><i class="fa-solid fa-envelope"></i> Contacto</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section id="hero" class="hero">
-    <div class="container hero__grid">
-      <div class="hero__copy" data-aos="fade-right">
-        <h1>Pasión por el fútbol, <br>garra de <span>Wolfies Femenil</span>.</h1>
-        <p>Formamos jugadoras, forjamos carácter y vivimos cada partido como una final. Bienvenida al club donde se juega con el corazón.</p>
-        <div class="hero__cta">
-          <a href="#teams" class="btn"><i class="fa-solid fa-futbol"></i> Ver equipos</a>
-          <a href="#contact" class="btn btn--ghost"><i class="fa-solid fa-paper-plane"></i> Contáctanos</a>
+  <main id="content">
+    <!-- Hero -->
+    <section id="hero" class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy" data-aos="fade-right">
+          <h1>Pasión por el fútbol, <br>garra de <span>Wolfies Femenil</span>.</h1>
+          <p>Formamos jugadoras, forjamos carácter y vivimos cada partido como una final. Bienvenida al club donde se juega con el corazón.</p>
+          <div class="hero__cta">
+            <a href="equipo.html" class="btn"><i class="fa-solid fa-futbol"></i> Ver equipo</a>
+            <a href="#contact" class="btn btn--ghost"><i class="fa-solid fa-paper-plane"></i> Contáctanos</a>
+          </div>
+        </div>
+
+        <!-- Dos imágenes: escudo + campo -->
+        <div class="hero__media" data-aos="fade-left">
+          <figure class="card-img card-img--crest">
+            <img src="img/banner.png" alt="Escudo del club Wolfies" />
+          </figure>
+          <figure class="card-img">
+            <img src="img/cancha.jpg" alt="Campo de juego" loading="lazy" decoding="async" />
+          </figure>
         </div>
       </div>
+    </section>
 
-      <!-- Dos imágenes: escudo + cancha -->
-      <div class="hero__media" data-aos="fade-left">
-        <figure class="card-img card-img--crest">
-          <img src="img/banner.png" alt="Escudo del club Wolfies" />
-        </figure>
-        <figure class="card-img">
-          <img src="img/cancha.jpg" alt="Cancha de fútbol" />
-        </figure>
+
+    <!-- Competencias (simple) -->
+<!-- Próximos torneos -->
+<section id="torneos" class="section torneos">
+  <div class="container">
+    <h2 data-aos="fade-up">Nuestros <span>Próximos Torneos</span></h2>
+    <p class="torneos__subtitle" data-aos="fade-up" data-aos-delay="100">
+      La <strong>Copa Hero</strong> se acerca. Mira los teasers y prepárate para la garra Wolfies.
+    </p>
+
+    <div class="torneos__grid">
+      <!-- Video 1 -->
+      <div class="torneos__video" data-aos="fade-right">
+        <video controls poster="img/copa-hero-thumb.jpg">
+          <source src="hero1.mp4" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="torneos__video" data-aos="fade-left">
+        <video controls poster="img/highlights-thumb.jpg">
+          <source src="hero2.mp4" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Secciones placeholder -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2 data-aos="fade-up">Sobre Wolfies</h2>
-      <p data-aos="fade-up" data-aos-delay="100">Contenido de ejemplo…</p>
-    </div>
-  </section>
 
-  <section id="teams" class="section">
-    <div class="container">
-      <h2 data-aos="fade-up">Nuestros equipos</h2>
-      <p data-aos="fade-up" data-aos-delay="100">Contenido de ejemplo…</p>
-    </div>
-  </section>
 
-  <section id="contact" class="section">
-    <div class="container">
-      <h2 data-aos="fade-up">Contacto</h2>
-      <p data-aos="fade-up" data-aos-delay="100">Contenido de ejemplo…</p>
-    </div>
-  </section>
+    <!-- Sobre nosotros -->
+    <section id="about" class="section about">
+      <div class="container about__grid">
+        <div class="about__media" data-aos="fade-right">
+          <img src="img/equipo.png" alt="Equipo Wolfies" loading="lazy" decoding="async" />
+        </div>
+        <div class="about__copy" data-aos="fade-left">
+          <h2>Conoce a <span>Wolfies</span></h2>
+          <p>
+            Wolfies Femenil es una comunidad deportiva que impulsa el talento,
+            la disciplina y el trabajo en equipo. Nuestro objetivo es inspirar a
+            más mujeres a sumarse al deporte y alcanzar su máximo potencial.
+          </p>
+          <a href="#team" class="btn">
+            <i class="fa-solid fa-paw"></i> Ver equipo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nuestro equipo (texto izq / imagen der) -->
+    <section id="team" class="team-section">
+      <div class="container team__grid">
+        <!-- Texto a la izquierda -->
+        <div class="team__copy" data-aos="fade-right">
+          <h2>Nuestro <span>Equipo</span></h2>
+          <p>
+            Wolfies Femenil es un equipo comprometido con el deporte, la disciplina y 
+            la unión. Representamos la pasión por el fútbol y el esfuerzo de 
+            cada una de nuestras jugadoras en la cancha. 
+          </p>
+          <p>
+            Más que un equipo, somos una familia que inspira, motiva y lucha por 
+            alcanzar cada meta.
+          </p>
+          <a href="#contact" class="btn">
+            <i class="fa-solid fa-futbol"></i> Únete a Wolfies
+          </a>
+        </div>
+
+        <!-- Imagen a la derecha -->
+        <div class="team__media" data-aos="fade-left">
+          <img src="img/equipo2.jpg" alt="Equipo Wolfies Femenil en el campo" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto (única sección #contact) -->
+    <section id="contact" class="section contact">
+      <div class="container contact__grid">
+        
+        <!-- Texto -->
+        <div class="contact__info" data-aos="fade-right">
+          <h2>Contacto</h2>
+          <p>
+            ¿Quieres unirte a <strong>Wolfies Femenil</strong> o tienes alguna duda?  
+            Escríbenos y nos pondremos en contacto contigo lo antes posible.
+          </p>
+
+          <ul class="contact__list">
+            <li><i class="fa-solid fa-location-dot"></i> Ciudad de México</li>
+            <li><i class="fa-solid fa-phone"></i> +52 55 1234 5678</li>
+            <li><i class="fa-solid fa-envelope"></i> contacto@wolfies.com</li>
+          </ul>
+
+          <a href="https://wa.me/525512345678" target="_blank" rel="noopener" class="btn">
+            <i class="fa-brands fa-whatsapp"></i> Escríbenos por WhatsApp
+          </a>
+        </div>
+
+        <!-- Formulario -->
+        <form class="contact__form" action="#" method="post" aria-label="Formulario de contacto" data-aos="fade-left">
+          <div class="form-group">
+            <input type="text" name="nombre" placeholder="Tu nombre" autocomplete="name" aria-label="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Tu correo" autocomplete="email" aria-label="Tu correo" required>
+          </div>
+          <div class="form-group">
+            <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje" aria-label="Escribe tu mensaje" required></textarea>
+          </div>
+          <button type="submit" class="btn">
+            <i class="fa-solid fa-paper-plane"></i> Enviar
+          </button>
+        </form>
+
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container">© Wolfies Femenil</div>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
